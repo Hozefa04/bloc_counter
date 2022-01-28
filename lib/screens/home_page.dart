@@ -1,4 +1,6 @@
 import 'package:bloc_counter/cubit/counter_cubit.dart';
+import 'package:bloc_counter/utils/app_colors.dart';
+import 'package:bloc_counter/utils/app_strings.dart';
 import 'package:bloc_counter/widgets/counter_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +12,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bloc Counter"),
+        title: Text(AppStrings.appTitle),
         centerTitle: true,
+        backgroundColor: AppColors.primaryColor,
       ),
       body: Center(
         child: BlocBuilder<CounterCubit, CounterState>(
@@ -21,11 +24,12 @@ class HomePage extends StatelessWidget {
             } else if (state is CounterIncrement) {
               return CounterText(text: state.count.toString());
             }
-            return const CounterText(text: "Error");
+            return CounterText(text: AppStrings.errorText);
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primaryColor,
         onPressed: () => context.read<CounterCubit>().increment(),
         child: const Icon(
           Icons.add,
